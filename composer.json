@@ -1,0 +1,26 @@
+{
+    "name": "locomotif/blog",
+    "description": "Blog module for Locomotif CMS.",
+    "type": "module",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Alex Popa",
+            "email": "p.alexandruadrian@yahoo.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Locomotif\\Blog\\BlogServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+       "psr-4": {
+           "Locomotif\\Blog\\": "src/"
+        }
+    }
+}
