@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Locomotif\Blog\Models\Blog;
 use Locomotif\Media\Controller\MediaController;
+use Locomotif\Blog\Controller\BlogCategoriesController;
 
 class BlogController extends Controller
 {
@@ -87,7 +88,8 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $associatedMedia      = app(MediaController::class)->mediaAssociations($blog->getTable(), $blog->id);
-        return view('blog::edit')->with('item', $blog)->with('associatedMedia', $associatedMedia);
+        $associatedCategories = app(BlogCategoriesController::class)->getCategAndSubcateg($blog->id);
+        return view('blog::edit')->with('item', $blog)->with('associatedMedia', $associatedMedia)->with('associatedCategories', $associatedCategories);
     }
 
     /**

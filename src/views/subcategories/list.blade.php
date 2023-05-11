@@ -1,10 +1,10 @@
 @extends('admin::inc/header')
-@section('title', 'Lista categorii')
+@section('title', 'Lista subcategorii')
 
 @section('content')
 <div class='details-list'><!--details-list-->
 	<div class='details-left'>
-		<h2>Listă Categorii blog</h2>
+		<h2>Listă Subcategorii blog</h2>
 	</div>
 	<div class='details-right'>
 		<ul class='list-controls'>
@@ -34,7 +34,7 @@
 		</div><!--filter-element-->
 		<div class='filter-element'>
 			<div class='filter-hold'>
-				<select name="item" id="item" value=''>
+				<select name="category" id="category" value=''>
 					<option value="10">10</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
@@ -55,7 +55,7 @@
 	<div class='actions-tab'>
 		<ul class='action-controls'>
 			<li>
-				<a href="/admin/blogCategories/create" class='iconControl'>
+				<a href="/admin/blogSubcategories/create" class='iconControl'>
 					<span>
 						<svg id="Plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
 							<path id="Plus-2" data-name="Plus" d="M11,5A1,1,0,0,0,9,5V9H5a1,1,0,0,0,0,2H9v4a1,1,0,0,0,2,0V11h4a1,1,0,0,0,0-2H11Z" transform="translate(-4 -4)" fill="#ffffff" fill-rule="evenodd"/>
@@ -73,10 +73,13 @@
 			<p>ID</p>
 		</div>
 		<div class='listing-box'>
-			<p>Nume categorie</p>
+			<p>Subcategorie</p>
+		</div>
+		<div class='listing-box alignCenter'>
+			<p>Categorie părinte</p>
 		</div>
 		<div class='listing-box flex06 alignCenter'>
-			<p>Url categorie</p>
+			<p>Url subbcategorie</p>
 		</div>
 		<div class='listing-box flex03 alignCenter'>
 			<p>Data</p>
@@ -95,10 +98,13 @@
 					<p>{{$key+1}}</p>
 				</div>
 				<div class='listing-box'>
-					<p><a href='/admin/blogCategories/{{$item->id}}/edit'>{{ $item->category_name }}</a></p>
+					<p><a href='/admin/blogSubcategories/{{$item->id}}/edit'>{{ $item->subcategory_name }}</a></p>
 				</div>
-                <div class='listing-box flex06 alignCenter'>
-					<p>{{ $item->category_url }}</p>
+				<div class='listing-box alignCenter'>
+					<p><a href='/admin/blogCategories/{{$item->category_id}}/edit'>{{ $item->category->category_name }}</a></p>
+				</div>
+                <div class='listing-box flex06 alignCenter' >
+					<p>{{ $item->subcategory_url }}</p>
 				</div>
 				<div class='listing-box flex03 alignCenter'>
 					<p>{{\Carbon\Carbon::parse($item->created_at)->format('Y-d-m')}}</p>
@@ -116,7 +122,7 @@
 						</svg>			  
 						<ul class='more-list'>
 							<li>
-								<form action="/admin/blogCategories/{{ $item->id }}" method="POST">@method('DELETE') @csrf <input type="submit" value="Șterge"/></form>
+								<form action="/admin/blogSubcategories/{{ $item->id }}" method="POST">@method('DELETE') @csrf <input type="submit" value="Șterge"/></form>
 							</li>
 						</ul>
 					</div>

@@ -11,4 +11,8 @@ class Blog extends Model
     public function categories(){
         return $this->belongsToMany('Locomotif\Blog\Models\BlogCategories', 'blog_to_categories', 'blog_id', 'category_id');
     }
+    
+    public function subcategories(){
+        return $this->belongsToMany('Locomotif\Blog\Models\BlogCategories', 'blog_to_subcategories', 'blog_id', 'subcategory_id');
+    }
 }
