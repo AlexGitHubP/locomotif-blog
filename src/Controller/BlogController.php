@@ -21,11 +21,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $media = Blog::orderBy('ordering', 'desc')->get();
-        foreach ($media as $key => $value) {
-            $media[$key]->status_nice = mapStatus($value->status);
+        $blog = Blog::with('categories', 'subcategories')->orderBy('ordering', 'desc')->get();
+        foreach ($blog as $key => $value) {
+            $blog[$key]->status_nice = mapStatus($value->status);
         }
-        return view('blog::list')->with('items', $media);
+        //echo '<pre>';print_r($blog);exit;
+        return view('blog::list')->with('items', $blog);
     }
 
     /**

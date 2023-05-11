@@ -1,10 +1,10 @@
 @extends('admin::inc/header')
-@section('title', 'Lista Blog')
+@section('title', 'Lista articole')
 
 @section('content')
 <div class='details-list'><!--details-list-->
 	<div class='details-left'>
-		<h2>Listă Blog</h2>
+		<h2>Listă articole blog</h2>
 	</div>
 	<div class='details-right'>
 		<ul class='list-controls'>
@@ -69,21 +69,19 @@
 
 <div class="content-container">
 	<div class='listing-element listing-header'>
-		<div class='listing-box flex02 alignCenter'>
+		<div class='listing-box flex01 alignCenter'>
 			<p>ID</p>
 		</div>
-		<div class='listing-box'>
+		<div class='listing-box flex07'>
 			<p>Nume</p>
 		</div>
-		<div class='listing-box flex03 alignCenter'>
-			<p>Url</p>
-		</div>
-		<div class='listing-box flex03 alignCenter'>
-			<p>Categorie</p>
+		<div class='listing-box flex05'>
+			<p>Categorii</p>
 		</div>
 		<div class='listing-box flex03 alignCenter'>
 			<p>Data</p>
 		</div>
+		
 		<div class='listing-box flex04 alignCenter'>
 			<p>Status</p>
 		</div>
@@ -94,19 +92,24 @@
 	<div class='listing-elements-hold'>
 		@foreach($items as $key => $item)
 			<div class='listing-element {{ $loop->last ? 'lastElement' : '' }}'>
-				<div class='listing-box flex02 alignCenter'>
+				<div class='listing-box flex01 alignCenter'>
 					<p>{{$key+1}}</p>
 				</div>
-				<div class='listing-box'>
+				<div class='listing-box flex07'>
 					<p><a href='/admin/blog/{{$item->id}}/edit'>{{ $item->name }}</a></p>
 				</div>
-                <div class='listing-box flex06 alignCenter'>
-					<p>{{ $item->url }}</p>
+				<div class='listing-box flex05'>
+					<ul>
+						@foreach ($item->categories as $category)
+						<li>
+							<a href='/admin/blogCategories/{{$category->id}}/edit'>{{$category->category_name}}</a>{{ $loop->last ? '' : ',' }} 
+						</li>
+						@endforeach
+					</ul>
 				</div>
 				<div class='listing-box flex03 alignCenter'>
 					<p>{{\Carbon\Carbon::parse($item->created_at)->format('Y-d-m')}}</p>
 				</div>
-                
 				<div class='listing-box flex04 alignCenter'>
 					<span class='general-btn noPointer status-{{$item->status}}'>{{$item->status_nice}}</span>
 				</div>

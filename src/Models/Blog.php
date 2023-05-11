@@ -13,6 +13,6 @@ class Blog extends Model
     }
     
     public function subcategories(){
-        return $this->belongsToMany('Locomotif\Blog\Models\BlogCategories', 'blog_to_subcategories', 'blog_id', 'subcategory_id');
+        return $this->belongsToMany('Locomotif\Blog\Models\BlogSubcategories', 'blog_to_subcategories', 'blog_id', 'subcategory_id');
     }
 }
